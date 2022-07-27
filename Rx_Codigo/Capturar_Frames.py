@@ -11,8 +11,8 @@ height = 1952
 #initialize roi as one single column:
 roi = int(width/2)#column of interest TODO: expand ROI to [x,y,w,h]"""
 
-path = "/media/danielsg27/0C78-D0E6/Pruebas_OCC/Capturas/"
-path_RBin = "/media/danielsg27/0C78-D0E6/Pruebas_OCC/Capturas/Capturas_ROI/"
+path = "/home/danielsg27/Documentos/Capturas/"
+#path_RBin = "/media/danielsg27/0C78-D0E6/Pruebas_OCC/Capturas/Capturas_ROI/"
 # ROI = x,y w,h
 x = 200
 y = 120
@@ -25,7 +25,7 @@ with picamera.PiCamera() as camera:
     camera.rotation = -90
     camera.ISO = 800
     camera.resolution=(1024,600)
-    camera.shutter_speed = 150 #100 o 180
+    camera.shutter_speed = 220 #100 o 180
     camera.brightness = 85 # 75
     camera.contrast = 100
     for i in range (10):
