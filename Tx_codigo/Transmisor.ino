@@ -1,7 +1,7 @@
 int ledRojo = 6;
 int ledVerde = 9;
 int ledAzul = 5;
-int dtm=420 ; // 400-420 480 para xd 400 para hola 360 //400 -- 600 franjas mas grandes
+int dtm=800 ; // 400-420 480 para xd 400 para hola 360 //400 -- 600 franjas mas grandes
 int dtm2=275; // 
 int dt=2;   //10 o 5
 
@@ -24,11 +24,14 @@ void loop() {
   inString.getBytes(plain, inString.length());
   header();
   for (int i = 0; i < inString.length(); i++){    
+    
     Serial.println(plain[i], BIN);    
     on();   
     delay(dt);
-    for (int j = 6; j >=0 ; j--){
-      MANCHESTER(bitRead(plain[i], j));
+    for (int j = 7; j >=0 ; j--){
+      bool n= bitRead(plain[i], j) ;
+      //Serial.println(n);
+      MANCHESTER(n);
       /*if(bitRead(plain[i], j)){
         //Serial.print("1");
         on();on();
@@ -76,12 +79,12 @@ void on(){
 void header(){
 for(int i=0; i<2; i++){     ////cabecera 
   //digitalWrite(led,LOW);//for bit 0
-  //color_header(); //color en inicio
-  off();
+  color_header(); //color en inicio
+  //off();
   delayMicroseconds(dtm2);
   //digitalWrite(led,HIGH);
-  //color_header(); //color en inicio
-  off();
+  color_header(); //color en inicio
+  //off();
   delayMicroseconds(dtm2);
   }
 }
