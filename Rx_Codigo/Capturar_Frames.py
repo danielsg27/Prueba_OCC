@@ -25,7 +25,7 @@ with picamera.PiCamera() as camera:
     camera.rotation = -90
     camera.ISO = 800
     camera.resolution=(1024,600)
-    camera.shutter_speed = 220 #100 o 180
+    camera.shutter_speed = 200 #100 o 180
     camera.brightness = 85 # 75
     camera.contrast = 100
     for i in range (10):
