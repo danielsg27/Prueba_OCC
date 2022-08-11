@@ -1,13 +1,13 @@
 int ledRojo = 6;
 int ledVerde = 9;
-int ledAzul = 5;
-int dtm=800 ; // 400-420 480 para xd 400 para hola 360 //400 -- 600 franjas mas grandes
-int dtm2=275; // 
-int dt=2;   //10 o 5
+int ledAzul = 5; 
+int dtm=250 ; //200-400 para tomar fotos en la RPI camara hasta 1m
+int dtm2=275; //Delay para el inicio del mensaje
+int dt=1;   //Delay para cada caracter
 
 
 String inString = "";
-String strBytes = "";
+//String strBytes = "";
 
 void setup() {
   Serial.begin(9600);
@@ -22,40 +22,22 @@ void loop() {
   //Convertir a byte
   byte plain[inString.length()];
   inString.getBytes(plain, inString.length());
+  //Serial.println(inString.length());
   header();
   for (int i = 0; i < inString.length(); i++){    
     
-    Serial.println(plain[i], BIN);    
+    Serial.println(i);    
     on();   
-    delay(dt);
-    for (int j = 7; j >=0 ; j--){
-      bool n= bitRead(plain[i], j) ;
-      //Serial.println(n);
-      MANCHESTER(n);
-      /*if(bitRead(plain[i], j)){
-        //Serial.print("1");
-        on();on();
-      }else{
-        //Serial.print("0");
-        off();off();
+    //delay(dt);
+    for (int k = 1; k <=2 ; k++){  //repetir 2 veces cada caracter
+      for (int j = 7; j >=0 ; j--){
+        bool n= bitRead(plain[i], j) ;
+        //Serial.println(n);
+        MANCHESTER(n);
       }
-      delayMicroseconds(dtm);*/
-    }    
-  }
-  
-  
-  
-//  for(int i=0; i<16; i++){
-//    //digitalWrite(led,LOW);//for bit 0
-//    if(i%2==0){
-//      on();on();  
-//    }else{
-//      off();off();
-//    }    
-//    delayMicroseconds(dtm);
-//    //digitalWrite(led,HIGH);
-//    
-//  } 
+         
+    }
+  }  
 }
 
 void off(){
@@ -66,8 +48,8 @@ void off(){
 
 void color_header(){
   digitalWrite(ledRojo,255);
-  digitalWrite(ledVerde,0);
-  digitalWrite(ledAzul,0);
+  digitalWrite(ledVerde,255);
+  digitalWrite(ledAzul,255);
 }
 
 void on(){
@@ -78,11 +60,9 @@ void on(){
 
 void header(){
 for(int i=0; i<2; i++){     ////cabecera 
-  //digitalWrite(led,LOW);//for bit 0
   color_header(); //color en inicio
   //off();
   delayMicroseconds(dtm2);
-  //digitalWrite(led,HIGH);
   color_header(); //color en inicio
   //off();
   delayMicroseconds(dtm2);
@@ -93,10 +73,9 @@ void readSerialPort() {
   
   if (Serial.available()) {
     inString = "";
-    //Serial.println(">:c");
     delay(10);
     while(Serial.available() > 0) {
-      inString += (char)Serial.read();     
+      inString += (char)Serial.read();              
     } 
     //inString = inString + "\n";   
     Serial.flush();
