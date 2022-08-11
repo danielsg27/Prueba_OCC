@@ -7,7 +7,8 @@ x = 200
 y = 300 
 w = 500 
 h = 200
-n = 24  #dtm=200-n=18 dtm=250-n=24 --  dtm=300-n=30
+n = 25  #dtm=200-n=18 dtm=250-n=24 --  dtm=300-n=30 por el redim de 3
+        #n=7.5 en 250  
 bits = []
 
 def analyzeImage(id,image):
@@ -79,14 +80,15 @@ def analyzeImage(id,image):
         elif(len(num_bin)>1.5*n and len(num_bin)<=2.5*n):
             binarios_final.append(num_bin[0])
             binarios_final.append(num_bin[0])
-        elif(len(num_bin)>2.5*n):
+        elif(len(num_bin)>2.5*n and len(num_bin)<=3*n):
             binarios_final.append(num_bin[0])
-            #binarios_final.append(num_bin[0])
-            #binarios_final.append(num_bin[0])
+            binarios_final.append("*")
+            binarios_final.append(num_bin[0])
+        elif(len(num_bin)>3*n):
+            binarios_final.append(num_bin[0])
             binarios_final.append("-")
             binarios_final.append("-")
             binarios_final.append(num_bin[0])
-    
     strBin = "".join(binarios_final)
     print(binarios_final)
     bits.insert(id,strBin)
@@ -108,8 +110,8 @@ def main():
     cap.set(cv2.CAP_PROP_ISO_SPEED, 800)
     cap.set(cv2.CAP_PROP_BRIGHTNESS,72) #70
     cap.set(cv2.CAP_PROP_CONTRAST,40)
-    cap.set(cv2.CAP_PROP_AUTO_EXPOSURE,0.52) #52
-    #cap.set(cv2.CAP_PROP_EXPOSURE,0.52) #52
+    #cap.set(cv2.CAP_PROP_AUTO_EXPOSURE,0.52) #52
+    cap.set(cv2.CAP_PROP_EXPOSURE,0.52) #52
     
     counter=0
     while cap.isOpened():                
