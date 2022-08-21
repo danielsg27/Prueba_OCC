@@ -1,9 +1,9 @@
 int ledRojo = 6;
 int ledVerde = 9;
 int ledAzul = 5; 
-int dtm=250 ; //200-400 para tomar fotos en la RPI camara hasta 1m
-int dtm2=275; //Delay para el inicio del mensaje
-int dt=1;   //Delay para cada caracter
+int dtm=200 ; //200-400 para tomar fotos en la RPI camara hasta 1m
+int dtm2=250; //Delay para el inicio del mensaje
+int dt=250;   //Delay para cada caracter
 
 
 String inString = "";
@@ -29,14 +29,15 @@ void loop() {
     Serial.println(i);    
     on();   
     //delay(dt);
-    for (int k = 1; k <=2 ; k++){  //repetir 2 veces cada caracter
+    delayMicroseconds(dt);
+    //for (int k = 1; k <= ; k++){  //repetir 3 veces cada caracter
       for (int j = 7; j >=0 ; j--){
         bool n= bitRead(plain[i], j) ;
         //Serial.println(n);
         MANCHESTER(n);
       }
          
-    }
+    //}
   }  
 }
 
