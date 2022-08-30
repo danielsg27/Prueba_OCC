@@ -26,18 +26,21 @@ void loop() {
   header();
   for (int i = 0; i < inString.length(); i++){    
     
-    Serial.println(i);    
+    //Serial.println(i);    
     on();   
     //delay(dt);
     delayMicroseconds(dt);
-    //for (int k = 1; k <= ; k++){  //repetir 3 veces cada caracter
+    for (int k = 1; k <= 2; k++){  //repetir 3 veces cada caracter
+      delayMicroseconds(dt);
+      Serial.println(i);    
       for (int j = 7; j >=0 ; j--){
         bool n= bitRead(plain[i], j) ;
+        Serial.println(i);
         //Serial.println(n);
         MANCHESTER(n);
       }
          
-    //}
+    }
   }  
 }
 
